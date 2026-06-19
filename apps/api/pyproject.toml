@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "forgesight-api"
+version = "0.1.0"
+description = "ForgeSight API"
+authors = ["ForgeSight"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.100"
+uvicorn = {extras=["standard"],version="^0.22"}
+sqlalchemy = "^2.0"
+psycopg2-binary = "^2.9"
+pydantic = "^2.5"
+alembic = "^1.11"
+python-multipart = "^0.0.6"
+dramatiq = "^1.36"
+redis = "^4.7"
+pillow = "^10.0"
+numpy = "^2.0"
+pandas = "^2.0"
+mlflow = "^2.6"
+onnxruntime = "^1.16"
+torch = "^2.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^8.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

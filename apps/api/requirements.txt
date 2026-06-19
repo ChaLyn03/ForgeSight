@@ -1,0 +1,16 @@
+fastapi==0.115.6
+starlette==0.41.3
+anyio==4.6.2.post1
+uvicorn[standard]
+sqlalchemy
+psycopg2-binary
+pydantic
+alembic
+python-multipart
+dramatiq
+redis
+pillow
+numpy
+python-jose[cryptography]
+argon2-cffi
+email-validator

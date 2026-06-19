@@ -1,0 +1,50 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dev dependencies (pip)
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r apps/api/requirements-dev.txt
+          # Install ML/runtime dependencies required for MLflow and model tests
+          if [ -f apps/api/requirements-ml.txt ]; then python -m pip install -r apps/api/requirements-ml.txt; fi
+      - name: Lint (ruff)
+        run: |
+          ruff check apps/api
+      - name: Create DB and run tests
+        env:
+          DATABASE_URL: sqlite:///./ci_test.db
+          MEDIA_ROOT: ./ci_media
+        working-directory: ./apps/api
+        run: |
+          python manage.py
+          pytest -q
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./apps/web
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: apps/web/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Audit production and build dependencies
+        run: npm audit --audit-level=high
