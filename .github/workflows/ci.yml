@@ -19,7 +19,7 @@ jobs:
           if [ -f apps/api/requirements-ml.txt ]; then python -m pip install -r apps/api/requirements-ml.txt; fi
       - name: Lint (ruff)
         run: |
-          ruff check apps/api
+          ruff check apps/api ml scripts
       - name: Create DB and run tests
         env:
           DATABASE_URL: sqlite:///./ci_test.db

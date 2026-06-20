@@ -1,4 +1,4 @@
-.PHONY: setup dev test lint audit compose-up compose-down migrate
+.PHONY: setup dev test lint audit smoke compose-up compose-down migrate
 
 PYTHON ?= $(shell if [ -x "$(CURDIR)/.venv/bin/python" ]; then printf "$(CURDIR)/.venv/bin/python"; else printf python3; fi)
 
@@ -12,7 +12,7 @@ setup:
 	cd apps/web && npm install
 
 lint:
-	$(PYTHON) -m ruff check apps/api ml
+	$(PYTHON) -m ruff check apps/api ml scripts
 	cd apps/web && npm run build
 
 test:
@@ -21,6 +21,9 @@ test:
 
 audit:
 	cd apps/web && npm audit --audit-level=high
+
+smoke:
+	$(PYTHON) scripts/smoke_test.py
 
 compose-up:
 	docker compose up --build

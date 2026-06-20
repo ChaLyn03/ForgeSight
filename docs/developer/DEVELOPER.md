@@ -106,6 +106,9 @@ The Compose stack mounts `./ml/artifacts` into MLflow, API, and worker container
 # View logs
 docker compose logs -f api
 
+# Verify deployed workflow
+make smoke
+
 # Run command in running container
 docker compose exec api python manage.py
 
@@ -245,8 +248,7 @@ See API docs at `http://localhost:8000/docs` (Swagger UI)
 ### Run All Tests
 
 ```bash
-cd apps/api
-../../.venv/bin/python -m pytest -q
+make test
 ```
 
 ### Run Specific Test
@@ -267,6 +269,14 @@ pytest --cov=forgesight_api --cov-report=html
 cd apps/web
 npm test -- --run --passWithNoTests
 ```
+
+### Deployment Smoke
+
+```bash
+make smoke
+```
+
+The smoke test uses `scripts/smoke_test.py` and expects the API to be available at `FORGESIGHT_API_BASE` or `http://127.0.0.1:8000/api/v1`.
 
 ---
 
@@ -411,12 +421,15 @@ GitHub Actions runs on every push/PR:
 3. **Frontend build** — Install with `npm ci` and run Vite production build
 4. **Frontend audit** — Run `npm audit --audit-level=high`
 
-See `.github/workflows/ci.yml` for details.
+The separate Compose smoke workflow can be run manually and runs on pushes to `main` that touch deploy-relevant files. It builds the stack and executes `scripts/smoke_test.py`.
+
+See `.github/workflows/ci.yml` and `.github/workflows/compose-smoke.yml` for details.
 
 ---
 
 ## Next Steps
 
 - See [Architecture Overview](../architecture/overview.md) for system design
+- See [Production Deployment](../deployment/PRODUCTION.md) for release planning
 - See [ML README](../../ml/README.md) for ML details
 - See [Frontend README](../../apps/web/README.md) for UI components

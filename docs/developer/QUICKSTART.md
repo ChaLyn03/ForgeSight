@@ -127,7 +127,10 @@ docker compose exec redis redis-cli
 make lint
 make test
 make audit
+make smoke
 ```
+
+`make smoke` expects the Compose stack to be running. It verifies the deployed API path by registering a user, creating an inspection, uploading an image, running inference, and fetching result assets.
 
 ### Clean Everything
 
@@ -167,4 +170,5 @@ docker compose down -v  # removes all containers & volumes
 
 - See [DEVELOPER.md](./DEVELOPER.md) for full setup & development guide
 - See [Architecture](../architecture/overview.md) for system design
+- See [Production Deployment](../deployment/PRODUCTION.md) for release planning
 - Train your own model: See [ml/README.md](../../ml/README.md)

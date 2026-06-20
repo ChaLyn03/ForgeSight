@@ -47,6 +47,7 @@ docker compose exec api python /app/ml/train_baseline.py \
 make lint
 make test
 make audit
+make smoke
 docker compose config
 docker compose ps
 ```
@@ -59,4 +60,5 @@ The deployment smoke path verified for this repo is: register, login, create ins
 - [Developer guide](docs/developer/DEVELOPER.md)
 - [Architecture overview](docs/architecture/overview.md)
 - [Detailed architecture notes](docs/developer/ARCHITECTURE.md)
+- [Production deployment plan](docs/deployment/PRODUCTION.md)
 - [ML baseline notes](ml/README.md)
