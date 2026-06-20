@@ -7,6 +7,8 @@ venv/
 node_modules/
 dist/
 storage/
+ml/artifacts/
+mlflow-artifacts/
 htmlcov/
 .coverage
 .ruff_cache/
@@ -14,6 +16,7 @@ htmlcov/
 *.sqlite3
 *.db
 mlflow.db
+ci_media/
 .DS_Store
 logs/
 pgdata/

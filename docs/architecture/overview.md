@@ -74,5 +74,6 @@ docker compose exec api python /app/ml/train_baseline.py \
 - For production, use managed PostgreSQL and Redis where possible, external object storage for media, and a durable MLflow backend/artifact store.
 - Scale the API and worker independently. The worker count controls inference throughput.
 - Keep `/health/ready` wired into service readiness checks because it verifies database connectivity.
+- Run `make smoke` after deploys to verify auth, inspection creation, upload, inference, worker processing, and result media.
 
 See [the developer architecture guide](../developer/ARCHITECTURE.md) for the longer component breakdown.

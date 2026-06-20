@@ -32,6 +32,9 @@ Detailed system design notes.
 ### [../architecture/overview.md](../architecture/overview.md)
 Short architecture summary for deployment and review.
 
+### [../deployment/PRODUCTION.md](../deployment/PRODUCTION.md)
+Production deployment plan and release checklist.
+
 ## Quick Links
 
 **First time?**
@@ -92,6 +95,11 @@ docker compose ps
 make test
 ```
 
+### Run Deployment Smoke
+```bash
+make smoke
+```
+
 ### Train Baseline Model
 ```bash
 docker compose exec api python /app/ml/train_baseline.py --tracking-uri http://mlflow:5000
@@ -123,7 +131,7 @@ ForgeSight/
 1. **[Start Here](./QUICKSTART.md)** - Get it running
 2. **[Deep Dive](./DEVELOPER.md)** - Learn the details
 3. **[Architecture](../architecture/overview.md)** - Review runtime topology
-4. **[Deploy](./ARCHITECTURE.md#deployment-architecture)** - Plan production
+4. **[Deploy](../deployment/PRODUCTION.md)** - Plan production
 
 ---
 
